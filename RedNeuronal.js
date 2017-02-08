@@ -9,7 +9,7 @@ function RedNeuronal(aprendizaje = 1, logR = false)
 	var capas       = [];
 	var aprendizaje = aprendizaje;
 	var error       = 1;
-    var log         = logR;
+	var log         = logR;
 
 	/* Getters */
 
@@ -29,9 +29,9 @@ function RedNeuronal(aprendizaje = 1, logR = false)
 	};
 
 	this.getLog = function()
-    {
-        return log;
-    };
+	{
+	    return log;
+	};
 
 	/* Setters */
 
@@ -50,18 +50,18 @@ function RedNeuronal(aprendizaje = 1, logR = false)
 		error = x;
 	};
 
-    this.setLog = function(x = false)
-    {
-        log = x;
-    };
+	this.setLog = function(x = false)
+	{
+	    log = x;
+	};
 
-    this.logMsj = function(msj = "")
-    {
-        if (log)
-        {
-            console.log(msj);
-        }
-    };
+	this.logMsj = function(msj = "")
+	{
+	    if (log)
+	    {
+	        console.log(msj);
+	    }
+	};
 
 	/* Metodos de la clase */
 
