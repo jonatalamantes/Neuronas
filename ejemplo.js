@@ -29,7 +29,7 @@ capa1 = [x1, x2];
 capa2 = [h1, h2];
 capa3 = [o1, o2];
 
-red = new RedNeuronal();
+red = new RedNeuronal(0.5, false);
 red.getCapas().push(capa1);
 red.getCapas().push(capa2);
 red.getCapas().push(capa3);
@@ -37,9 +37,19 @@ red.getCapas().push(capa3);
 entradas = [0.05, 0.10];
 salidas  = [0.01, 0.99];
 
-red.clasificar(entradas);
-
-for (i = 0; i < capa3.length; i++)
+//Entrenamos muchas veces
+for (var i = 0; i < 10000; i++)
 {
-	console.log(capa3[i].getSalidas()[0].getValor());
+    red.entrenar(entradas, salidas);
+
+    /*if (i == 0 || i == 1 || i == 9999)
+    {
+        console.log(red.getError());
+    }*/
+}
+
+//Sacamos los valores de la capa de salida
+for (var i = 0; i < capa3.length; i++)
+{
+    console.log(capa3[i].getSalidas()[0].toString())
 }

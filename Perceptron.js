@@ -1,7 +1,7 @@
 //Jonathan Elias Sandoval Talamanets
-//neurona.js
-//Clase: Administración Inteligente de Datos
-//Proyecto 1
+//Perceptron.js
+//Clase: Clasificación Inteligente de Datos
+//Proyecto 2
 
 function Perceptron(nombreR = "", biasR = 0, logR = false)
 {

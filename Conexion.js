@@ -1,15 +1,23 @@
+//Jonathan Elias Sandoval Talamanets
+//Conexion.js
+//Clase: Clasificación Inteligente de Datos
+//Proyecto 2
+
 function Conexion(nombreR = "", pesoR = 1, origenR = null, destinoR = null)
 {
 	/* Atributos */
 
-	var nombre     = nombreR;
-	var peso       = pesoR;
-	var origen     = origenR;
-	var destino    = destinoR;
-	var valor      = 1;
-	var acumulador = 0;
+	var nombre       = nombreR;
+	var peso         = pesoR;
+	var origen       = origenR;
+	var destino      = destinoR;
+	var error        = 0;
+	var errorParcial = 0;
+	var valor        = 1;
+	var acumulador   = 0;
 	var historicoAcumuladores = [];
 	var historicoValores      = [];
+	var historicoPesos        = [];
 
 	if (origenR !== null)
 	{
@@ -48,6 +56,16 @@ function Conexion(nombreR = "", pesoR = 1, origenR = null, destinoR = null)
 		return valor;
 	};
 
+	this.getError = function()
+	{
+		return error;
+	};
+
+	this.getErrorParcial = function()
+	{
+		return error;
+	};
+
 	this.getAcumulador = function()
 	{
 		return acumulador;
@@ -63,14 +81,14 @@ function Conexion(nombreR = "", pesoR = 1, origenR = null, destinoR = null)
 		return historicoValores;
 	};
 
+	this.getHistoricoPesos = function()
+	{
+		return historicoPesos;
+	};
+
 	/* Setters */
 
 	this.setNombre = function(x = "")
-	{
-		peso = x;
-	};
-
-	this.setPeso = function(x = 1)
 	{
 		peso = x;
 	};
@@ -84,6 +102,27 @@ function Conexion(nombreR = "", pesoR = 1, origenR = null, destinoR = null)
 	{
 		destino = x;
 	};
+
+	this.setError = function(x = 0)
+	{
+		error = x;
+	};
+
+
+	this.setErrorParcial = function(x = 0)
+	{
+		error = x;
+	};
+		
+	this.setPeso = function(x = 1)
+	{
+		if (x !== peso)
+		{
+			historicoPesos.push(peso);
+			peso = x;
+		}
+	};
+
 
 	this.setValor = function(x = 0)
 	{
@@ -113,8 +152,15 @@ function Conexion(nombreR = "", pesoR = 1, origenR = null, destinoR = null)
 		historicoValores = x;
 	};
 
+	this.setHistoricoPesos = function(x = [])
+	{
+		historicoPesos = x;
+	};
+
 	this.toString = function()
 	{
-		return this.getNombre() + "|" + this.getPeso() + "|" + this.getValor() + "|" + this.getOrigen() + this.getDestino();
+		return this.getNombre() + "|" + this.getPeso() + "|" + 
+			   this.getValor() + "|" + this.getOrigen() + this.getDestino() + "|" +
+			   "Error: " + this.getError() + "|" + "Error P:" + this.getErrorParcial();
 	};
 }

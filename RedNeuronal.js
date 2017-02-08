@@ -1,206 +1,201 @@
-function RedNeuronal(factorAprendizaje)
+//Jonathan Elias Sandoval Talamanets
+//RedNeuronal.js
+//Clase: Clasificación Inteligente de Datos
+//Proyecto 2
+//doc: https://mattmazur.com/2015/03/17/a-step-by-step-backpropagation-example/
+
+function RedNeuronal(aprendizaje = 1, logR = false)
 {
-	this.primeraCapa   = [];
-	this.ultimaCapa    = [];
-	this.cantidadCapas = 0;
-	this.factorAprendizaje = factorAprendizaje;
+	var capas       = [];
+	var aprendizaje = aprendizaje;
+	var error       = 1;
+    var log         = logR;
 
-	this.entrenar = function(entradas, salidas)
+	/* Getters */
+
+	this.getCapas = function()
 	{
-		//Revisamos que los tamaños de la red sean los adecuados
-		if (entradas.length !== this.capas[0].length)
+		return capas;
+	};
+
+	this.getAprendizaje = function()
+	{
+		return aprendizaje;
+	};
+
+	this.getError = function()
+	{
+		return error;
+	};
+
+	this.getLog = function()
+    {
+        return log;
+    };
+
+	/* Setters */
+
+	this.setCapas = function(x = [])
+	{
+		capas = x;
+	};
+
+	this.setApredizaje = function(x = 1)
+	{
+		aprendizaje = x;
+	};
+
+	this.setError = function(x = 1)
+	{
+		error = x;
+	};
+
+    this.setLog = function(x = false)
+    {
+        log = x;
+    };
+
+    this.logMsj = function(msj = "")
+    {
+        if (log)
+        {
+            console.log(msj);
+        }
+    };
+
+	/* Metodos de la clase */
+
+	this.construir = function(arregloCantidades = [])
+	{
+
+	};
+
+	this.entrenar = function(inputs = [], outputs = [])
+	{
+		/* FORWARD PASS */
+
+		this.logMsj("/* FORWARD PASS */");
+
+		ultimaCapa  = this.getCapas()[this.getCapas().length-1];
+		primeraCapa = this.getCapas()[0];
+
+		this.clasificar(inputs);
+
+		//Calculamos el error total de la capa de salida
+		errorNet = 0;
+		for (var i = 0; i < ultimaCapa.length; i++)
 		{
-			throw "Error al entrenar; Longitud de entradas y la primera capa son distintas: " + 
-				   entradas + "|" + this.capas[0];
+			errorNet += Math.pow(outputs[i] - ultimaCapa[i].getSalidas()[0].getValor(),2)/2;
 		}
 
-		if (salidas.length !== this.capas[this.capas.length-1].length)
+		this.setError(errorNet);
+		this.logMsj("Error total: " + this.getError());
+
+		/* BACKWARD PASS */
+
+		this.logMsj("/* FORWARD PASS */");
+
+		//Actualizamos los pesos en la capa de salida
+		for (var i = 0; i < ultimaCapa.length; i++)
 		{
-			throw "Error al entrenar; Longitud de salida y la ultima capa son distintas: " + 
-				   entradas + "|" + this.capas[this.capas.length-1];
-		}
-
-		//Entrenamos con el método de Back Propagation
-		
-		/* Paso Hacia Adelante */
-		
-		//Calculamos el valor esperado y el valor actual
-		actual         = salidas;
-		predicion      = [];
-		acumuladores   = [];
-		salidasLocales = entradas;
-
-		for (var i = 0; i < this.capas.length; i++)
-		{
-			entradasLocales  = salidasLocales;
-			salidasLocales   = [];
-			acumuladoresTemp = [];
-
-			for (var j = 0; j < this.capas[i].length; j++)
+			for (var j = 0; j < ultimaCapa[i].getEntradas().length; j++)
 			{
-				p = new Perceptron();
-				capaTemp = this.capas[i];
-				res      = capaTemp[j].clasificarSinActivar(entradasLocales);
+				conexion    = ultimaCapa[i].getEntradas()[j];
+				valorSalida = ultimaCapa[i].getSalidas()[0].getValor();
 
-				salidasLocales.push(p.funcionActivacion(res));
-				acumuladoresTemp.push(res);
-			}
+				errorGeneral = -(outputs[i] - valorSalida);
+				errorSalida  = valorSalida * (1 - valorSalida);
+				errorRed     = conexion.getValor();
+				errorTotal   = errorGeneral * errorSalida * errorRed;
 
-			predicion.push(salidasLocales);
-			acumuladores.push(acumuladoresTemp);
-		}
+				this.logMsj(errorGeneral + " * " + errorSalida + " * " + errorRed + " = " + errorTotal);
+				this.logMsj(conexion.toString());
 
-		//Calculamos el error total de la ultima capa
-		error = 0;
+				//Actualizamos lo pesos de la conexion
+				conexion.setPeso(conexion.getPeso() - this.getAprendizaje() * errorTotal);
+				conexion.setError(errorTotal);
+				conexion.setErrorParcial(errorGeneral*errorSalida);
+				conexion.getOrigen().setError();
 
-		for (var i = 0; i < predicion[predicion.length-1].length; i++)
-		{
-			error += (Math.pow((actual[i] - predicion[[predicion.length-1]][i]), 2)/2);
-		}
-
-		/* Paso Hacia Atras */
-
-		//Calculamos los gradientes para cada uno de los nodos de salida
-		gradientes = [];
-		gradientesError  = [];
-		gradientesSalida = [];
-		gradientesRed    = [];
-		pesosAnteriores  = [];
-
-		for (var i = predicion.length-1; i >= 1; i--)
-		{
-			perceptronS = new Perceptron();
-
-			for (var j = 0; j < predicion[i].length; j++)
-			{
-				gradienteError  = -(actual[j]-predicion[i][j]);
-				gradienteSalida = predicion[i][j] * (1-predicion[i][j]);
-				gradienteRed    = predicion[i-1][j];
-				gradientePeso   = gradienteError * gradienteSalida * gradienteRed;
-
-				gradientes.push(gradientePeso);
-				gradientesError.push(gradienteError);
-				gradientesSalida.push(gradienteSalida);
-				gradientesRed.push(gradienteRed);
-
-				console.log("gradienteError: " + "-(" + actual[j] + " - " + predicion[i][j] + ")" + "|" + gradienteError)
-				console.log("gradienteSalida: " + predicion[i][j] + " * " + "(1-" + predicion[i][j] + ")" + "|" + gradienteSalida)
-				console.log("gradienteRed: " + gradienteRed + "|" + gradienteRed)
-				console.log("gradienteTotal: " + gradienteError + " * " + gradienteSalida + " * " + gradienteRed + "|" + gradientePeso)
+				this.logMsj(conexion.toString());
 			}
 		}
-
-		//Actualiamos los pesos de la última capa
-		for (var i = 0; i < this.capas[this.capas.length-1].length; i++)
-		{
-			capaTemp = 	this.capas[this.capas.length-1];
-			pesosAnteriores.push(capaTemp[i].pesos.slice());
-
-			for (var j = 0; j < capaTemp[i].pesos.length; j++)
-			{
-				capaTemp[i].pesos[j] = (capaTemp[i].pesos[j] - (this.factorAprendizaje * gradientes[i]));
-					
-				console.log(capaTemp[i].pesos[j] + " - " + "(" + this.factorAprendizaje + " * " + gradientes[i] + ")");
-				console.log(capaTemp[i].pesos[j]);
-			}
-		}
-
-		console.log(pesosAnteriores);
 
 		//Actualizamos las capas ocultas
-		for (var i = this.capas.length-2; i >= 0; i--) //Por cada una de las capas ocultas
+		for (var i = this.getCapas().length-2; i >= 1; i--)
 		{
-			for (var j = 0; j < this.capas[i].length; j++) //Sacamos el numero de neuronas en cada capa
+			capaActual = this.getCapas()[i];
+
+			for (var k = 0; k < capaActual.length; k++)
 			{
-				for (var k = 0; k < this.capas[i+1].length; k++) //Sacamos el numero de neuronas de la siguiente capa a la oculta
+				neurona = capaActual[k];
+				errorGeneral = 0
+				errorSalida  = 0;
+
+				//Sacamos el error de la neurona
+				for (var j = 0; j < neurona.getSalidas().length; j++)
 				{
-					errorGradienteO = gradientesError
+					conexion = neurona.getSalidas()[j];					
+					errorGeneral += conexion.getErrorParcial() * conexion.getHistoricoPesos()[0];
+					errorSalida  = conexion.getValor();
 				}
 
-				errorGradienteO = gradientesError[j]
+				errorSalida = errorSalida * (1 - errorSalida);
 
-				gradiente1 = gradientesError[this.capas.length-2-i] * gradientesSalida[this.capas.length-2-i];
-				peso       = pesosAnteriores[j];
-				producto   = gradiente1 * peso;
+				//Calculamos el error de cada conexion entrante y actualizamos los pesos
+				for (var j = 0; j < neurona.getEntradas().length; j++)
+				{
+					conexion   = neurona.getEntradas()[j];
+					errorRed   = conexion.getValor();
+					errorTotal = errorRed * errorGeneral * errorSalida;
 
-				//console.log(gradiente1);
-				//console.log(peso);
-				//console.log(producto);
+					this.logMsj(errorGeneral + " * " + errorSalida + " * " + errorRed + " = " + errorTotal);
+					this.logMsj(conexion.toString());
+
+					//Actualizamos lo pesos de la conexion
+					conexion.setPeso(conexion.getPeso() - this.getAprendizaje() * errorTotal);
+					conexion.setError(errorTotal);
+					conexion.setErrorParcial(errorGeneral*errorSalida);
+					conexion.getOrigen().setError();
+
+					this.logMsj(conexion.toString());
+				}
 			}
 		}
 	};
 
-	this.clasificar = function(entradas)
+	this.clasificar = function(inputs = [])
 	{
-		salidasLocales = entradas;
-
-		for (var i = 0; i < this.capas.length; i++)
+		if (this.getCapas() == undefined || this.getCapas().length == 0 || this.getCapas()[0].length != inputs.length)
 		{
-			entradasLocales = salidasLocales;
-			salidasLocales  = [];
-
-			for (var j = 0; j < this.capas[i].length; j++)
-			{
-				capaTemp = this.capas[i];
-				res      = capaTemp[j].clasificar(entradasLocales);
-
-				salidasLocales.push(res);
-			}
+			throw "Error no coinciden las entradas con la capa";
 		}
-
-		return salidasLocales;
-	}
-
-	this.crearCapa = function(cantidadNeuronas = 1, capaAnterior = null, capaSiguiente = null)
-	{
-		capaNueva = [];
-
-		for (i = 0; i < cantidadNeuronas; i++)
+		else
 		{
-			neurona = new Perceptron();
-			capaNueva.push(neurona);
-
-			neurona.capaAnterior  = capaAnterior;
-			neurona.capaSiguiente = capaSiguiente;
-		}
-
-		return capaNueva;
-	}
-
-	//Se especificar un arreglo con la cantidad de capas que tendra, 
-	//Ejemplo [3,2,1] tendra 3 capaz con 3,2,1 en cada capa
-	this.crear = function(arregloCantidadCapas)
-	{
-		if (arregloCantidadCapas != undefined && arregloCantidadCapas.length != 0)
-		{
-			var cantidadC = 0;
-			for (var i = 0; i < arregloCantidadCapas.length; i++)
+			//Asignamos las entradas al vector de la capa de entrada
+			for (var i = 0; i < this.getCapas()[0].length; i++)
 			{
-				if (parseInt(arregloCantidadCapas[i]) !== NaN)
+				neurona = this.getCapas()[0][i];
+
+				for (var j = 0; j < neurona.getEntradas().length; j++)
 				{
-					capaCreada = [];
+					neurona.getEntradas()[j].setValor(inputs[i]);
+				}
 
-					if (i == 0)
-					{
-
-					}
-					else if (i == arregloCantidadCapas.)
-					{
-
-					}
-
-					for (var j = 0; j < arregloCantidadCapas[i]; j++)
-					{
-						perceptron = new Perceptron();
-						capaCreada.push(perceptron);
-					}
-
-					this.capas.push(capaCreada);
-					cantidadC++;
+				for (var j = 0; j < neurona.getSalidas().length; j++)
+				{
+					neurona.getSalidas()[j].setValor(inputs[i]);
 				}
 			}
 
-			this.cantidadCapas = cantidadC;
+			//Comenzamos la clasificacion
+			for (var i = 1; i < this.getCapas().length; i++)
+			{
+				for (var j = 0; j < this.getCapas()[i].length; j++)
+				{
+					this.getCapas()[i][j].clasificar(inputs);
+				}
+			}
 		}
 	};
 }
