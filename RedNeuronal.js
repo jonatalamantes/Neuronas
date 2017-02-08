@@ -8,6 +8,8 @@ function RedNeuronal(aprendizaje = 1, logR = false)
 {
 	var capas       = [];
 	var aprendizaje = aprendizaje;
+	var ultimaCapa  = [];
+	var primeraCapa = [];
 	var error       = 1;
 	var log         = logR;
 
@@ -33,6 +35,16 @@ function RedNeuronal(aprendizaje = 1, logR = false)
 	    return log;
 	};
 
+	this.getPrimeraCapa = function()
+	{
+	    return primeraCapa;
+	};
+
+	this.getUltimaCapa = function()
+	{
+	    return ultimaCapa;
+	};
+
 	/* Setters */
 
 	this.setCapas = function(x = [])
@@ -53,6 +65,16 @@ function RedNeuronal(aprendizaje = 1, logR = false)
 	this.setLog = function(x = false)
 	{
 	    log = x;
+	};
+
+	this.setUltimaCapa = function(x = false)
+	{
+	    ultimaCapa = x;
+	};
+
+	this.setPrimeraCapa = function(x = false)
+	{
+	    primeraCapa = x;
 	};
 
 	this.logMsj = function(msj = "")
@@ -76,16 +98,16 @@ function RedNeuronal(aprendizaje = 1, logR = false)
 
 		this.logMsj("/* FORWARD PASS */");
 
-		ultimaCapa  = this.getCapas()[this.getCapas().length-1];
-		primeraCapa = this.getCapas()[0];
+		this.setUltimaCapa(this.getCapas()[this.getCapas().length-1]);
+		this.setPrimeraCapa(this.getCapas()[0]);
 
 		this.clasificar(inputs);
 
 		//Calculamos el error total de la capa de salida
 		errorNet = 0;
-		for (var i = 0; i < ultimaCapa.length; i++)
+		for (var i = 0; i < this.getUltimaCapa().length; i++)
 		{
-			errorNet += Math.pow(outputs[i] - ultimaCapa[i].getSalidas()[0].getValor(),2)/2;
+			errorNet += Math.pow(outputs[i] - this.getUltimaCapa()[i].getSalidas()[0].getValor(),2)/2;
 		}
 
 		this.setError(errorNet);
@@ -96,12 +118,12 @@ function RedNeuronal(aprendizaje = 1, logR = false)
 		this.logMsj("/* FORWARD PASS */");
 
 		//Actualizamos los pesos en la capa de salida
-		for (var i = 0; i < ultimaCapa.length; i++)
+		for (var i = 0; i < this.getUltimaCapa().length; i++)
 		{
-			for (var j = 0; j < ultimaCapa[i].getEntradas().length; j++)
+			for (var j = 0; j < this.getUltimaCapa()[i].getEntradas().length; j++)
 			{
-				conexion    = ultimaCapa[i].getEntradas()[j];
-				valorSalida = ultimaCapa[i].getSalidas()[0].getValor();
+				conexion    = this.getUltimaCapa()[i].getEntradas()[j];
+				valorSalida = this.getUltimaCapa()[i].getSalidas()[0].getValor();
 
 				errorGeneral = -(outputs[i] - valorSalida);
 				errorSalida  = valorSalida * (1 - valorSalida);

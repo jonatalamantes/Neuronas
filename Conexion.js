@@ -118,7 +118,7 @@ function Conexion(nombreR = "", pesoR = 1, origenR = null, destinoR = null)
 	{
 		if (x !== peso)
 		{
-			historicoPesos.push(peso);
+			historicoPesos.unshift(peso);
 			peso = x;
 		}
 	};
@@ -128,7 +128,7 @@ function Conexion(nombreR = "", pesoR = 1, origenR = null, destinoR = null)
 	{
 		if (x !== valor)
 		{
-			historicoValores.push(valor);
+			historicoValores.unshift(valor);
 			valor = x;
 		}
 	};
@@ -137,7 +137,7 @@ function Conexion(nombreR = "", pesoR = 1, origenR = null, destinoR = null)
 	{
 		if (x !== acumulador)
 		{
-			historicoAcumuladores.push(acumulador);
+			historicoAcumuladores.unshift(acumulador);
 			acumulador = x;
 		}
 	};

@@ -42,10 +42,10 @@ for (var i = 0; i < 10000; i++)
 {
     red.entrenar(entradas, salidas);
 
-    /*if (i == 0 || i == 1 || i == 9999)
+    if (i == 0 || i == 1 || i == 9999)
     {
         console.log(red.getError());
-    }*/
+    }
 }
 
 //Sacamos los valores de la capa de salida
