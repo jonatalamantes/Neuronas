@@ -104,11 +104,7 @@ function Perceptron(nombreR = "", nombref = 'sigmoidal', biasR = 0, logR = false
         //La ponemos a clasificar y a reajustarse
         for (j = 0; j < inputs.length; j++)
         {
-<<<<<<< HEAD
             this.clasificarEntrada(inputs[j]);
-=======
-            this.clasificar(inputs[j]);
->>>>>>> c34fecf1bbd970260c0b4f103dd44a59358319b1
             this.setError(parseFloat(outputs[j] - this.getSalidas()[0].getValor()));
             this.ajustarPesos(inputs[j]);
         }
