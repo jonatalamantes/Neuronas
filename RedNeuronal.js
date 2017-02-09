@@ -87,10 +87,119 @@ function RedNeuronal(aprendizaje = 1, logR = false)
 
 	/* Metodos de la clase */
 
-	this.construir = function(arregloCantidades = [])
+	this.construir = function(arregloCantidades = [], pesoNeurona = 1)
 	{
+		if (arregloCantidades !== undefined && arregloCantidades.length != 0)
+		{
+			this.setCapas([]);
 
+			//comenzamos por crear cada una de las capas
+			for (i = 0; i < arregloCantidades.length; i++)
+			{
+				var capaActual = [];
+
+				for (var j = 0; j < parseInt(arregloCantidades[i]); j++)
+				{
+					neurona = new Perceptron("Capa" + i + "Neurona" + j, pesoNeurona);
+					capaActual.push(neurona);
+				}
+
+				if (i == 0) //Primera Capa
+				{
+					for (var j = 0; j < parseInt(arregloCantidades[i]); j++)
+					{
+						conexion = new Conexion("Capa" + i + "Neurona" + j, 1, null, capaActual[j]);
+					}
+				}
+				else if (i == arregloCantidades.length-1) //Ultima capa
+				{
+					for (var j = 0; j < parseInt(arregloCantidades[i]); j++)
+					{
+						for (var k = 0; k < this.getCapas()[i-1].length; k++)
+						{
+							neuronaEntrada = this.getCapas()[i-1][k];
+							neuronaSalida  = capaActual[j];
+
+							conexion = new Conexion("Capa" + i + "Neurona" + j, 1, neuronaEntrada, neuronaSalida);
+						}
+					}
+
+					for (var j = 0; j < parseInt(arregloCantidades[i]); j++)
+					{
+						conexion = new Conexion("Capa" + (i+1) + "Neurona" + j, 1, capaActual[j], null);
+					}
+				}
+				else //Capa oculta
+				{
+					for (var j = 0; j < parseInt(arregloCantidades[i]); j++)
+					{
+						for (var k = 0; k < this.getCapas()[i-1].length; k++)
+						{
+							neuronaEntrada = this.getCapas()[i-1][k];
+							neuronaSalida  = capaActual[j];
+
+							conexion = new Conexion("Capa" + i + "Neurona" + j, 1, neuronaEntrada, neuronaSalida);
+						}
+					}
+				}
+
+				this.getCapas().push(capaActual);
+			}
+
+			this.setUltimaCapa(this.getCapas()[this.getCapas().length-1]);
+			this.setPrimeraCapa(this.getCapas()[0]);
+		}
 	};
+
+	this.toString = function()
+	{
+		cad = "";
+
+		for (var i = 0; i < this.getCapas().length; i++)
+		{
+			cad += "Capa: " + i + "*\n";
+
+			for (var j = 0; j < this.getCapas()[i].length; j++)
+			{
+				cad += "  Neurona: " + this.getCapas()[i][j].toString() + "#\n";
+
+				for (var k = 0; k < this.getCapas()[i][j].getEntradas().length; k++)
+				{
+					cad += "    Entrada: " + this.getCapas()[i][j].getEntradas()[k].toString() + "$\n";
+				}
+
+				for (var k = 0; k < this.getCapas()[i][j].getSalidas().length; k++)
+				{
+					cad += "    Salidas: " + this.getCapas()[i][j].getSalidas()[k].toString() + "$\n";
+				}
+			}
+		}
+
+		return cad;
+	}
+
+	this.logString = function()
+	{
+		for (var i = 0; i < this.getCapas().length; i++)
+		{
+			console.log("Capa: " + i + "*");
+
+			for (var j = 0; j < this.getCapas()[i].length; j++)
+			{
+				console.log("  Neurona: " + this.getCapas()[i][j].toString() + "#");
+
+				for (var k = 0; k < this.getCapas()[i][j].getEntradas().length; k++)
+				{
+					console.log("    Entrada: " + this.getCapas()[i][j].getEntradas()[k].toString() + "$");
+				}
+
+				for (var k = 0; k < this.getCapas()[i][j].getSalidas().length; k++)
+				{
+					console.log("    Salidas: " + this.getCapas()[i][j].getSalidas()[k].toString() + "$");
+				}
+			}
+		}
+	}
 
 	this.entrenar = function(inputs = [], outputs = [])
 	{
@@ -100,6 +209,11 @@ function RedNeuronal(aprendizaje = 1, logR = false)
 
 		this.setUltimaCapa(this.getCapas()[this.getCapas().length-1]);
 		this.setPrimeraCapa(this.getCapas()[0]);
+
+		if (this.getUltimaCapa().length !== outputs.length)
+		{
+			throw "Error no coinciden la cantidad salidas con la capa de salida";
+		}
 
 		this.clasificar(inputs);
 

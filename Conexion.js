@@ -159,8 +159,28 @@ function Conexion(nombreR = "", pesoR = 1, origenR = null, destinoR = null)
 
 	this.toString = function()
 	{
-		return this.getNombre() + "|" + this.getPeso() + "|" + 
-			   this.getValor() + "|" + this.getOrigen() + this.getDestino() + "|" +
-			   "Error: " + this.getError() + "|" + "Error P:" + this.getErrorParcial();
+		cad = "Nombre{" + this.getNombre() + "} Peso{" + this.getPeso() + "} Valor{" + this.getValor() + "}";
+
+		if (this.getOrigen() == null)
+		{
+			cad += " Origen{null}";
+		}
+		else
+		{
+			cad += " Origen{" + this.getOrigen().getNombre() + "}";
+		}
+
+		if (this.getDestino() == null)
+		{
+			cad += " Destino{null}";
+		}
+		else
+		{
+			cad += " Destino{" + this.getDestino().getNombre() + "}";
+		}
+
+		cad += " Error{" + this.getError() + "} ErrorParcial{" + this.getErrorParcial() + "}";
+
+		return cad;
 	};
 }

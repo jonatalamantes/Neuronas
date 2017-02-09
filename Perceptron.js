@@ -233,6 +233,6 @@ function Perceptron(nombreR = "", biasR = 0, logR = false)
 
     this.toString = function()
     {
-        return this.getNombre() + " " + this.getBias();
+        return "Nombre{" + this.getNombre() + "} Peso{" + this.getBias() + "}";
     }
 }

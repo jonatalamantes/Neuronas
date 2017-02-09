@@ -44,12 +44,12 @@ for (var i = 0; i < 10000; i++)
 
     if (i == 0 || i == 1 || i == 9999)
     {
-        console.log(red.getError());
+        console.log("Error en Iteracion " + i + ": " + red.getError());
     }
 }
 
-//Sacamos los valores de la capa de salida
-for (var i = 0; i < capa3.length; i++)
-{
-    console.log(capa3[i].getSalidas()[0].toString())
-}
+console.log(red.toString());
+
+/*red2 = new RedNeuronal();
+red2.construir([35,30,20,12]);
+red2.logString();*/
