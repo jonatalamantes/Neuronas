@@ -94,7 +94,7 @@ function Perceptron(nombreR = "", biasR = 0, logR = false)
         for (j = 0; j < inputs.length; j++)
         {
             this.clasificar(inputs[j]);
-            this.setError(parseFloat(outputs[j] - this.getSalidas()[0].getSalida()));
+            this.setError(parseFloat(outputs[j] - this.getSalidas()[0].getValor()));
             this.ajustarPesos(inputs[j]);
         }
     };
