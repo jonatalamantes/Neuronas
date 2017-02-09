@@ -4,7 +4,7 @@
 //Proyecto 2
 //doc: https://mattmazur.com/2015/03/17/a-step-by-step-backpropagation-example/
 
-function RedNeuronal(aprendizaje = 1, logR = false)
+function RedNeuronal(aprendizaje = 1, logR = true)
 {
 	var capas       = [];
 	var aprendizaje = aprendizaje;
@@ -229,7 +229,7 @@ function RedNeuronal(aprendizaje = 1, logR = false)
 
 		/* BACKWARD PASS */
 
-		this.logMsj("/* FORWARD PASS */");
+		this.logMsj("/* BACKWARD PASS */");
 
 		//Actualizamos los pesos en la capa de salida
 		for (var i = 0; i < this.getUltimaCapa().length; i++)
@@ -265,7 +265,7 @@ function RedNeuronal(aprendizaje = 1, logR = false)
 			for (var k = 0; k < capaActual.length; k++)
 			{
 				neurona = capaActual[k];
-				errorGeneral = 0
+				errorGeneral = 0;
 				errorSalida  = 0;
 
 				//Sacamos el error de la neurona
@@ -329,7 +329,7 @@ function RedNeuronal(aprendizaje = 1, logR = false)
 			{
 				for (var j = 0; j < this.getCapas()[i].length; j++)
 				{
-					this.getCapas()[i][j].clasificar(inputs);
+					this.getCapas()[i][j].clasificar();
 				}
 			}
 		}

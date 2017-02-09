@@ -3,16 +3,17 @@
 //Clase: Clasificación Inteligente de Datos
 //Proyecto 2
 
-function Perceptron(nombreR = "", biasR = 0, logR = false)
+function Perceptron(nombreR = "", nombref = 'sigmoidal', biasR = 0, logR = false)
 {
     /* Atributos */
 
-    var nombre     = nombreR;
-    var bias       = biasR;
-    var log        = logR;
-    var entradas   = [];
-    var salidas    = [];
-    var error      = 0;
+    var nombre        = nombreR;
+    var bias          = biasR;
+    var log           = logR;
+    var entradas      = [];
+    var salidas       = [];
+    var error         = 0;
+    var nombrefuncion = nombref;
 
     /* Getters */
 
@@ -44,6 +45,11 @@ function Perceptron(nombreR = "", biasR = 0, logR = false)
     this.getError = function()
     {
         return error;
+    };
+
+    this.getNombreFuncionActivacion = function()
+    {
+        return nombrefuncion;
     };
 
     /* Setters */
@@ -78,6 +84,11 @@ function Perceptron(nombreR = "", biasR = 0, logR = false)
         error = x;
     };
 
+    this.setNombreFuncionActivacion = function(x = 'sigmoidal')
+    {
+        nombrefuncion = x;
+    };
+
     /* Metodos de la Clase */
 
     this.logMsj = function(msj = "")
@@ -93,8 +104,8 @@ function Perceptron(nombreR = "", biasR = 0, logR = false)
         //La ponemos a clasificar y a reajustarse
         for (j = 0; j < inputs.length; j++)
         {
-            this.clasificar(inputs[j]);
-            this.setError(parseFloat(outputs[j] - this.getSalidas()[0].getSalida()));
+            this.clasificarEntrada(inputs[j]);
+            this.setError(parseFloat(outputs[j] - this.getSalidas()[0].getValor()));
             this.ajustarPesos(inputs[j]);
         }
     };
@@ -133,7 +144,7 @@ function Perceptron(nombreR = "", biasR = 0, logR = false)
         this.logMsj(" Pesos Nuevos: " + cad);        
     };
 
-    this.clasificar = function(input)
+    this.clasificarEntrada = function(input)
     {
         //Si no coinciden el numero de pesos con el numero de elementos en las entradas, reajustamos
         if (this.getEntradas() == undefined || this.getEntradas().length != input.length)
@@ -165,6 +176,7 @@ function Perceptron(nombreR = "", biasR = 0, logR = false)
 
         for (var i = 0; i < input.length; i++)
         {
+            this.getEntradas()[i].setValor(input[i]);
             acumuladorTemp += parseFloat(input[i] * this.getEntradas()[i].getPeso());
         }
 
@@ -177,8 +189,10 @@ function Perceptron(nombreR = "", biasR = 0, logR = false)
         }
 
         this.logMsj(" * Realizando clasificacion sobre " + input);
-        this.logMsj("Resultado Acumulador : " + this.getAcumulador());
+        this.logMsj("Resultado Acumulador : " + acumuladorTemp);
         this.logMsj("Resultado Funcion Activicacion: " + this.getSalidas()[0].getValor());
+
+        return this.getSalidas()[0].getValor();
     };
 
     this.clasificar = function()
@@ -188,8 +202,6 @@ function Perceptron(nombreR = "", biasR = 0, logR = false)
 
         for (var i = 0; i < this.getEntradas().length; i++)
         {
-            //console.log(this.getEntradas()[i].getValor() + " * " + this.getEntradas()[i].getPeso());
-            //console.log("Neurona: " + this.getNombre() + " Entrada " + i + ": " + this.getEntradas()[i].toString())
             acumuladorTemp += parseFloat(this.getEntradas()[i].getValor() * this.getEntradas()[i].getPeso());
         }
 
@@ -199,7 +211,6 @@ function Perceptron(nombreR = "", biasR = 0, logR = false)
         {
             this.getSalidas()[i].setValor(this.activacion(acumuladorTemp));
             this.getSalidas()[i].setAcumulador(acumuladorTemp);
-            //console.log("Neurona: " + this.getNombre() + " Salida " + i + ": " + this.getSalidas()[i].toString())
         }
 
         this.logMsj(" * Realizando clasificacion sobre " + this.getEntradas());
@@ -209,7 +220,14 @@ function Perceptron(nombreR = "", biasR = 0, logR = false)
 
     this.activacion = function(numero)
     {
-        return this.sigmoidal(numero);
+        if (nombrefuncion == 'sigmoidal')
+        {
+            return this.sigmoidal(numero);
+        }
+        else
+        {
+            return this.signo(numero);
+        }
     }
 
     this.sigmoidal = function(numero)
@@ -233,6 +251,6 @@ function Perceptron(nombreR = "", biasR = 0, logR = false)
 
     this.toString = function()
     {
-        return "Nombre{" + this.getNombre() + "} Peso{" + this.getBias() + "}";
+        return "Nombre{" + this.getNombre() + "} Bias{" + this.getBias() + "}";
     }
 }
