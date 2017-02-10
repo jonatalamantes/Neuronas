@@ -1,0 +1,197 @@
+<html>
+    <head>
+        <style>
+            .cuadroPeso{
+                width: 30px;
+                border: 1px solid black;
+                text-align: center;
+                padding-top: 7px;
+                padding-bottom: 7px;
+            }
+            .noSeleccionado{
+                background-color: white;
+                border: 1px solid black;
+                padding: 15px;
+            }
+            .seleccionado{
+                background-color: black;
+                border: 1px solid black;
+                padding: 15px;
+            }
+        </style>
+    </head>  
+    <body>
+        <table>
+            <tr>
+                <td class="noSeleccionado">
+                    <table>
+                        <tr>
+                            <td id="1" class="noSeleccionado"></td>
+                            <td id="2" class="noSeleccionado"></td>
+                            <td id="3" class="noSeleccionado"></td>
+                            <td id="4" class="noSeleccionado"></td>
+                            <td id="5" class="noSeleccionado"></td>
+                        </tr>
+                        <tr>
+                            <td id="6" class="noSeleccionado"></td>
+                            <td id="7" class="noSeleccionado"></td>
+                            <td id="8" class="noSeleccionado"></td>
+                            <td id="9" class="noSeleccionado"></td>
+                            <td id="10" class="noSeleccionado"></td>
+                        </tr>
+                        <tr>
+                            <td id="11" class="noSeleccionado"></td>
+                            <td id="12" class="noSeleccionado"></td>
+                            <td id="13" class="noSeleccionado"></td>
+                            <td id="14" class="noSeleccionado"></td>
+                            <td id="15" class="noSeleccionado"></td>
+                        </tr>
+                        <tr>
+                            <td id="16" class="noSeleccionado"></td>
+                            <td id="17" class="noSeleccionado"></td>
+                            <td id="18" class="noSeleccionado"></td>
+                            <td id="19" class="noSeleccionado"></td>
+                            <td id="20" class="noSeleccionado"></td>
+                        </tr>
+                        <tr>
+                            <td id="21" class="noSeleccionado"></td>
+                            <td id="22" class="noSeleccionado"></td>
+                            <td id="23" class="noSeleccionado"></td>
+                            <td id="24" class="noSeleccionado"></td>
+                            <td id="25" class="noSeleccionado"></td>
+                        </tr>
+                        <tr>
+                            <td id="26" class="noSeleccionado"></td>
+                            <td id="27" class="noSeleccionado"></td>
+                            <td id="28" class="noSeleccionado"></td>
+                            <td id="29" class="noSeleccionado"></td>
+                            <td id="30" class="noSeleccionado"></td>
+                        </tr>
+                        <tr>
+                            <td id="31" class="noSeleccionado"></td>
+                            <td id="32" class="noSeleccionado"></td>
+                            <td id="33" class="noSeleccionado"></td>
+                            <td id="34" class="noSeleccionado"></td>
+                            <td id="35" class="noSeleccionado"></td>
+                        </tr>
+                    </table>
+                </td>
+                <td>
+                    <table>
+                        <tr>
+                            <td id="peso1" class="cuadroPeso">0</td>
+                            <td id="peso2" class="cuadroPeso">0</td>
+                            <td id="peso3" class="cuadroPeso">0</td>
+                            <td id="peso4" class="cuadroPeso">0</td>
+                            <td id="peso5" class="cuadroPeso">0</td>
+                        </tr>
+                        <tr>
+                            <td id="peso6" class="cuadroPeso">0</td>
+                            <td id="peso7" class="cuadroPeso">0</td>
+                            <td id="peso8" class="cuadroPeso">0</td>
+                            <td id="peso9" class="cuadroPeso">0</td>
+                            <td id="peso10" class="cuadroPeso">0</td>
+                        </tr>
+                        <tr>
+                            <td id="peso11" class="cuadroPeso">0</td>
+                            <td id="peso12" class="cuadroPeso">0</td>
+                            <td id="peso13" class="cuadroPeso">0</td>
+                            <td id="peso14" class="cuadroPeso">0</td>
+                            <td id="peso15" class="cuadroPeso">0</td>
+                        </tr>
+                        <tr>
+                            <td id="peso16" class="cuadroPeso">0</td>
+                            <td id="peso17" class="cuadroPeso">0</td>
+                            <td id="peso18" class="cuadroPeso">0</td>
+                            <td id="peso19" class="cuadroPeso">0</td>
+                            <td id="peso20" class="cuadroPeso">0</td>
+                        </tr>
+                        <tr>
+                            <td id="peso21" class="cuadroPeso">0</td>
+                            <td id="peso22" class="cuadroPeso">0</td>
+                            <td id="peso23" class="cuadroPeso">0</td>
+                            <td id="peso24" class="cuadroPeso">0</td>
+                            <td id="peso25" class="cuadroPeso">0</td>
+                        </tr>
+                        <tr>
+                            <td id="peso26" class="cuadroPeso">0</td>
+                            <td id="peso27" class="cuadroPeso">0</td>
+                            <td id="peso28" class="cuadroPeso">0</td>
+                            <td id="peso29" class="cuadroPeso">0</td>
+                            <td id="peso30" class="cuadroPeso">0</td>
+                        </tr>
+                        <tr>
+                            <td id="peso31" class="cuadroPeso">0</td>
+                            <td id="peso32" class="cuadroPeso">0</td>
+                            <td id="peso33" class="cuadroPeso">0</td>
+                            <td id="peso34" class="cuadroPeso">0</td>
+                            <td id="peso35" class="cuadroPeso">0</td>
+                        </tr>
+                    </table>
+                </td>
+                </tr>
+            </table>
+        <button onclick="clasificar()">Clasificar</button>
+        <button onclick="limpiar()">Limpiar</button>
+        <script>
+            var entradaCero =[0, 1, 1, 1, 0, 1, 0, 0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 0, 1, 1, 0, 0, 0, 1, 0, 1, 1, 1, 0];
+            var entradaUno = [0,  0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 0];
+            var entradaDos = [0, 1, 1, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1];
+            var entradaTres = [1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 1, 1, 1, 0];
+            var entradaCuatro = [0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 1, 0, 1, 0, 1, 0, 0, 1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0];
+            var entradaCinco = [1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 1, 1, 1, 0];
+            var entradaSeis = [0, 0, 1, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 1, 1, 1, 0];
+            var entradaSiete = [1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0];
+            var entradaOcho = [0, 1, 1, 1, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 1, 1, 1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1, 1, 0];
+            var entradaNueve = [0, 1, 1, 1, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0];
+            var entradaGuion = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+            var entradaPunto = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 0, 0];
+            var salidaCero = [1,0,0,0,0,0,0,0,0,0,0,0];
+            var salidaUno = [0,1,0,0,0,0,0,0,0,0,0,0];
+            var salidaDos = [0,0,1,0,0,0,0,0,0,0,0,0];
+            var salidaTres = [0,0,0,1,0,0,0,0,0,0,0,0];
+            var salidaCuatro = [0,0,0,0,1,0,0,0,0,0,0,0];
+            var salidaCinco = [0,0,0,0,0,1,0,0,0,0,0,0];
+            var salidaSeis = [0,0,0,0,0,0,1,0,0,0,0,0];
+            var salidaSiete = [0,0,0,0,0,0,0,1,0,0,0,0];
+            var salidaOcho = [0,0,0,0,0,0,0,0,1,0,0,0];
+            var salidaNueve = [0,0,0,0,0,0,0,0,0,1,0,0];
+            var salidaGuion = [0,0,0,0,0,0,0,0,0,0,1,0];
+            var salidaPunto = [0,0,0,0,0,0,0,0,0,0,0,1];
+            
+            for(i=1,j=35;i<=j;i++){
+                document.getElementById(i).onclick = function(){
+                    if(this.getAttribute("class") == "noSeleccionado"){
+                        this.setAttribute("class","seleccionado");
+                        var id = this.getAttribute("id");
+                        document.getElementById("peso"+id).innerHTML=1;
+                    }
+                    else{
+                        this.setAttribute("class","noSeleccionado");
+                        var id = this.getAttribute("id");
+                        document.getElementById("peso"+id).innerHTML=0;
+                    }
+                };
+            }
+            //Todavia no clasifica
+            function clasificar(){
+                var arregloEntradas=[];
+                for(i=1,j=35;i<=j;i++){
+                    var valor = parseInt(document.getElementById("peso"+i).innerHTML);
+                    arregloEntradas.push(valor);
+                }
+                console.log(arregloEntradas);
+            }
+            function limpiar(){
+                for(i=1,j=35;i<=j;i++){
+                    var cuadro = document.getElementById(i);
+                    if(cuadro.getAttribute("class") == "seleccionado"){                    
+                        cuadro.setAttribute("class","noSeleccionado");
+                        var id = cuadro.getAttribute("id");
+                        document.getElementById("peso"+id).innerHTML=0;
+                    }
+                }
+            }
+        </script>
+    </body>
+</html>
