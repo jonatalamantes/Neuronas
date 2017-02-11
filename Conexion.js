@@ -8,7 +8,16 @@ function Conexion(nombreR = "", pesoR = 1, origenR = null, destinoR = null)
 	/* Atributos */
 
 	var nombre       = nombreR;
-	var peso         = pesoR;
+
+	if (pesoR == 'random')
+	{
+		var peso = Math.random();
+	}
+	else
+	{
+		var peso = pesoR;
+	}
+
 	var origen       = origenR;
 	var destino      = destinoR;
 	var error        = 0;
@@ -116,30 +125,24 @@ function Conexion(nombreR = "", pesoR = 1, origenR = null, destinoR = null)
 		
 	this.setPeso = function(x = 1)
 	{
-		if (x !== peso)
-		{
-			historicoPesos.unshift(peso);
-			peso = x;
-		}
+		historicoPesos = [];
+		historicoPesos.unshift(peso);
+		peso = x;
 	};
 
 
 	this.setValor = function(x = 0)
 	{
-		if (x !== valor)
-		{
-			historicoValores.unshift(valor);
-			valor = x;
-		}
+		historicoValores = [];
+		historicoValores.unshift(valor);
+		valor = x;
 	};
 
 	this.setAcumulador = function(x = 0)
 	{
-		if (x !== acumulador)
-		{
-			historicoAcumuladores.unshift(acumulador);
-			acumulador = x;
-		}
+		historicoAcumuladores = [];
+		historicoAcumuladores.unshift(acumulador);
+		acumulador = x;
 	};
 
 	this.setHistorioAcumuladores = function(x = [])

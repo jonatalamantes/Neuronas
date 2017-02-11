@@ -100,7 +100,7 @@ function RedNeuronal(aprendizaje = 1, logR = true)
 
 				for (var j = 0; j < parseInt(arregloCantidades[i]); j++)
 				{
-					neurona = new Perceptron("Capa" + i + "Neurona" + j, pesoNeurona);
+					neurona = new Perceptron("Capa" + i + "Neurona" + j, 'sigmoidal', pesoNeurona);
 					capaActual.push(neurona);
 				}
 
@@ -108,7 +108,7 @@ function RedNeuronal(aprendizaje = 1, logR = true)
 				{
 					for (var j = 0; j < parseInt(arregloCantidades[i]); j++)
 					{
-						conexion = new Conexion("Capa" + i + "Neurona" + j, 1, null, capaActual[j]);
+						conexion = new Conexion("Capa" + i + "Neurona" + j, 'random', null, capaActual[j]);
 					}
 				}
 				else if (i == arregloCantidades.length-1) //Ultima capa
@@ -120,13 +120,13 @@ function RedNeuronal(aprendizaje = 1, logR = true)
 							neuronaEntrada = this.getCapas()[i-1][k];
 							neuronaSalida  = capaActual[j];
 
-							conexion = new Conexion("Capa" + i + "Neurona" + j, 1, neuronaEntrada, neuronaSalida);
+							conexion = new Conexion("Capa" + i + "Neurona" + j, 'random', neuronaEntrada, neuronaSalida);
 						}
 					}
 
 					for (var j = 0; j < parseInt(arregloCantidades[i]); j++)
 					{
-						conexion = new Conexion("Capa" + (i+1) + "Neurona" + j, 1, capaActual[j], null);
+						conexion = new Conexion("Capa" + (i+1) + "Neurona" + j, 'random', capaActual[j], null);
 					}
 				}
 				else //Capa oculta
@@ -138,7 +138,7 @@ function RedNeuronal(aprendizaje = 1, logR = true)
 							neuronaEntrada = this.getCapas()[i-1][k];
 							neuronaSalida  = capaActual[j];
 
-							conexion = new Conexion("Capa" + i + "Neurona" + j, 1, neuronaEntrada, neuronaSalida);
+							conexion = new Conexion("Capa" + i + "Neurona" + j, 'random', neuronaEntrada, neuronaSalida);
 						}
 					}
 				}
@@ -244,7 +244,7 @@ function RedNeuronal(aprendizaje = 1, logR = true)
 				errorRed     = conexion.getValor();
 				errorTotal   = errorGeneral * errorSalida * errorRed;
 
-				this.logMsj(errorGeneral + " * " + errorSalida + " * " + errorRed + " = " + errorTotal);
+				this.logMsj("ECCS: " + errorGeneral + " * " + errorSalida + " * " + errorRed + " = " + errorTotal);
 				this.logMsj(conexion.toString());
 
 				//Actualizamos lo pesos de la conexion
@@ -285,7 +285,7 @@ function RedNeuronal(aprendizaje = 1, logR = true)
 					errorRed   = conexion.getValor();
 					errorTotal = errorRed * errorGeneral * errorSalida;
 
-					this.logMsj(errorGeneral + " * " + errorSalida + " * " + errorRed + " = " + errorTotal);
+					this.logMsj("ECE: " + errorGeneral + " * " + errorSalida + " * " + errorRed + " = " + errorTotal);
 					this.logMsj(conexion.toString());
 
 					//Actualizamos lo pesos de la conexion
