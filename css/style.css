@@ -1,0 +1,26 @@
+body{
+    background: url(../resources/background.png);
+}
+canvas {
+    background-color: white;
+    width: 100%;
+    height: auto;
+}
+.cuadroPeso
+{
+    width: 30px;        
+    border: 1px solid black;
+    text-align: center;
+    padding-top: 7px;
+    padding-bottom: 7px;
+}
+.noSeleccionado{
+    background-color: white;
+    border: 1px solid black;
+    padding: 15px;
+}
+.seleccionado{
+    background-color: black;
+    border: 1px solid black;
+    padding: 15px;
+}

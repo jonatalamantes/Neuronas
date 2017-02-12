@@ -1,34 +1,18 @@
 <html>
     <head>
-        <style>
-            .cuadroPeso{
-                width: 30px;
-                border: 1px solid black;
-                text-align: center;
-                padding-top: 7px;
-                padding-bottom: 7px;
-            }
-            .noSeleccionado{
-                background-color: white;
-                border: 1px solid black;
-                padding: 15px;
-            }
-            .seleccionado{
-                background-color: black;
-                border: 1px solid black;
-                padding: 15px;
-            }
-        </style>
         <meta charset="utf-8">
-        <script type="text/javascript" src='Conexion.js'></script>
-        <script type="text/javascript" src='Perceptron.js'></script>
-        <script type="text/javascript" src='RedNeuronal.js'></script>
+        <title>Números</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="css/style.css">
     </head>  
     <body>
-        <table>
-            <tr>
-                <td class="noSeleccionado">
-                    <table>
+        <div class="container">
+            <h1 >Perceptrones</h1>
+        </div>
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col">
+                   <table >
                         <tr>
                             <td id="1" class="noSeleccionado"></td>
                             <td id="2" class="noSeleccionado"></td>
@@ -79,8 +63,8 @@
                             <td id="35" class="noSeleccionado"></td>
                         </tr>
                     </table>
-                </td>
-                <td>
+                </div>
+                <div class="col">
                     <table>
                         <tr>
                             <td id="peso1" class="cuadroPeso">0</td>
@@ -132,9 +116,10 @@
                             <td id="peso35" class="cuadroPeso">0</td>
                         </tr>
                     </table>
-                </td>
-                </tr>
-            </table>
+                </div>
+            </div>
+        </div>
+
         <button onclick="clasificar()">Clasificar</button>
         <button onclick="limpiar()">Limpiar</button>
         <script>
@@ -347,5 +332,13 @@
             limpiar();
 
         </script>
+        <!--<script type="text/javascript" src='Conexion.js'></script>-->
+        <!--<script type="text/javascript" src='Perceptron.js'></script>--> 
+        <!--<script type="text/javascript" src='RedNeuronal.js'></script>-->
+
+        <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+        <script type="text/javascript" src='canvas.js'></script>
     </body>
 </html>
