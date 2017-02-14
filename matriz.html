@@ -21,6 +21,15 @@
             <div class="row align-items-center align-content-lg-center vertical-align">
                 <div class="col">
                    <table cellpadding="0" cellspacing="0" style="width: 80%">
+                        <thead>
+                            <tr>
+                                <th class="text-center">1</th>
+                                <th class="text-center">2</th>
+                                <th class="text-center">3</th>
+                                <th class="text-center">4</th>
+                                <th class="text-center">5</th>
+                            </tr>    
+                        </thead>
                         <tr>
                             <td id="1" class="noSeleccionado"></td>
                             <td id="2" class="noSeleccionado"></td>
@@ -73,65 +82,85 @@
                     </table>
                 </div>
                 <div class="col">
-                    <div class="row align-items-center align-content-lg-center vertical-align">
-                        <table cellpadding="0" cellspacing="0" style="width: 80%">
-                            <tr>
-                                <td id="peso1" class="cuadroPeso">0</td>
-                                <td id="peso2" class="cuadroPeso">0</td>
-                                <td id="peso3" class="cuadroPeso">0</td>
-                                <td id="peso4" class="cuadroPeso">0</td>
-                                <td id="peso5" class="cuadroPeso">0</td>
-                            </tr>
-                            <tr>
-                                <td id="peso6" class="cuadroPeso">0</td>
-                                <td id="peso7" class="cuadroPeso">0</td>
-                                <td id="peso8" class="cuadroPeso">0</td>
-                                <td id="peso9" class="cuadroPeso">0</td>
-                                <td id="peso10" class="cuadroPeso">0</td>
-                            </tr>
-                            <tr>
-                                <td id="peso11" class="cuadroPeso">0</td>
-                                <td id="peso12" class="cuadroPeso">0</td>
-                                <td id="peso13" class="cuadroPeso">0</td>
-                                <td id="peso14" class="cuadroPeso">0</td>
-                                <td id="peso15" class="cuadroPeso">0</td>
-                            </tr>
-                            <tr>
-                                <td id="peso16" class="cuadroPeso">0</td>
-                                <td id="peso17" class="cuadroPeso">0</td>
-                                <td id="peso18" class="cuadroPeso">0</td>
-                                <td id="peso19" class="cuadroPeso">0</td>
-                                <td id="peso20" class="cuadroPeso">0</td>
-                            </tr>
-                            <tr>
-                                <td id="peso21" class="cuadroPeso">0</td>
-                                <td id="peso22" class="cuadroPeso">0</td>
-                                <td id="peso23" class="cuadroPeso">0</td>
-                                <td id="peso24" class="cuadroPeso">0</td>
-                                <td id="peso25" class="cuadroPeso">0</td>
-                            </tr>
-                            <tr>
-                                <td id="peso26" class="cuadroPeso">0</td>
-                                <td id="peso27" class="cuadroPeso">0</td>
-                                <td id="peso28" class="cuadroPeso">0</td>
-                                <td id="peso29" class="cuadroPeso">0</td>
-                                <td id="peso30" class="cuadroPeso">0</td>
-                            </tr>
-                            <tr>
-                                <td id="peso31" class="cuadroPeso">0</td>
-                                <td id="peso32" class="cuadroPeso">0</td>
-                                <td id="peso33" class="cuadroPeso">0</td>
-                                <td id="peso34" class="cuadroPeso">0</td>
-                                <td id="peso35" class="cuadroPeso">0</td>
-                            </tr>
-                        </table>    
-                    </div>
+                    <table cellpadding="0" cellspacing="0" style="width: 80%" border="1">
+                        <thead>
+                            <tr id="tHeaders">
+                            <th class="text-center">Clase</th>
+                            <th class="text-center">Salida</th>
+                            <th class="text-center">Salida redondeada</th>
+                        </tr>    
+                        </thead>
+                        <tr id="c1">
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr id="c2">
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr id="c3">
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr id="c4">
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr id="c5">
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr id="c6">
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr id="c7">
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr id="c8">
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr id="c9">
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr id="c10">
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr id="c11">
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr id="c12">
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                    </table>        
                 </div>
             </div>
         </div>
-        <div class="container">
+        <div class="container text-center">
             <button onclick="clasificar()" class="btn-outline-primary" type="button">Clasificar</button>
             <button onclick="limpiar()" class="btn-outline-primary" type="button">Limpiar</button>    
+        </div>
+        <div class="container text-center" padding ="1">
+            <label>La entrada pertenece a la clase: </label>
+            <input type="text" name="resultado">
         </div>
         <script>
 
@@ -254,7 +283,6 @@
             var salidasRed = [salidaCero,   salidaUno,   salidaDos,   salidaTres,
                               salidaCuatro, salidaCinco, salidaSeis,  salidaSiete,
                               salidaOcho,   salidaNueve, salidaPunto, salidaGuion];
-
 			/* Red Neuronal de Antes 
             var redNeuronal = new RedNeuronal(0.2, false);
             redNeuronal.construir([35,30,25,20,15,12], 0.8);
@@ -367,12 +395,6 @@
             }
 
             limpiar();
-
         </script>
-        <!--<script type="text/javascript" src='Conexion.js'></script>-->
-        <!--<script type="text/javascript" src='Perceptron.js'></script>--> 
-        <!--<script type="text/javascript" src='RedNeuronal.js'></script>-->
-
-      
     </body>
 </html>
