@@ -244,11 +244,13 @@
                               salidaCuatro, salidaCinco, salidaSeis,  salidaSiete,
                               salidaOcho,   salidaNueve, salidaPunto, salidaGuion];
 
+			/* Red Neuronal de Antes 
             var redNeuronal = new RedNeuronal(0.2, false);
             redNeuronal.construir([35,30,25,20,15,12], 0.8);
 
             //entrenamiento de la red (Tiempo estimado de procesamiento: 06:08)
             var fechaInicio = new Date();
+
 
             for (var i = 0; i < 1500; i++)
             {
@@ -274,6 +276,27 @@
             console.log(redNeuronal.getError());
 
             //redNeuronal.logString();
+            */
+           
+           /* Creacion de la red de ENCOG */
+           var network = ENCOG.BasicNetwork.create( [
+			  ENCOG.BasicLayer.create(ENCOG.ActivationSigmoid.create(), 35, 1),
+			  ENCOG.BasicLayer.create(ENCOG.ActivationSigmoid.create(), 20, 1),
+			  ENCOG.BasicLayer.create(ENCOG.ActivationSigmoid.create(), 15, 1),
+			  ENCOG.BasicLayer.create(ENCOG.ActivationSigmoid.create(), 12, 1)] );
+			network.randomize();
+
+			var train = ENCOG.PropagationTrainer.create(network,entradasRed,salidasRed,"RPROP",0,0);
+
+			var iteration = 1;
+			do
+			{
+				train.iteration();
+				var str = "Training Iteration #" + iteration + ", Error: " + train.error;
+				console.log(str);
+				iteration++;
+			} 
+			while(iteration < 1000 && train.error > 0.0001);
             
             for(i=1,j=35;i<=j;i++){
                 document.getElementById(i).onclick = function(){
@@ -292,7 +315,7 @@
 
             function clasificar()
             {
-                clases = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", ".", "-"];
+                clases = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "Punto", "Guion"];
 
                 var arregloEntradas=[];
                 for(i=1,j=35;i<=j;i++){
@@ -300,22 +323,25 @@
                     arregloEntradas.push(valor);
                 }
 
-                redNeuronal.clasificar(arregloEntradas);
+				var output = [];
+				network.compute(arregloEntradas,output);
 
                 var mayor    = 0;
                 var posMayor = 0;
 
-                for (var i = 0; i < redNeuronal.getUltimaCapa().length; i++)
+                for (var i = 0; i < output.length; i++)
                 {
-                    var valor = redNeuronal.getUltimaCapa()[i].getSalidas()[0].getValor();
+                    var valor = output[i];
 
                     if (valor > mayor)
                     {   
                         posMayor = i;
                         mayor    = valor;
                     }
+    
+                    var str = "Clase: " + clases[i] + " Output: " + valor;
 
-                    console.log(clases[i] + ": " + valor);
+					console.log(str);
                 }
 
                 console.log("Patron mas parecido: '" + clases[posMayor] + "' " + mayor);
@@ -340,5 +366,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
         <script type="text/javascript" src='canvas.js'></script>
+        <script type="text/javascript" src='Third-Party/encog-javascript/encog.js'></script>
+        <script type="text/javascript" src='Third-Party/encog-javascript/encog-widget.js'></script>
     </body>
 </html>
