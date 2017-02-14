@@ -4,15 +4,23 @@
         <title>Números</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="css/style.css">
+        <script type="text/javascript" src='Third-Party/encog-javascript/encog.js'></script>
+        <script type="text/javascript" src='Third-Party/encog-javascript/encog-widget.js'></script>
+        <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+        <script type="text/javascript" src='canvas.js'></script>
     </head>  
     <body>
-        <div class="container">
-            <h1 >Perceptrones</h1>
+        <div class="container" padding="2">
+            <header>
+                <h1>Perceptrones</h1>    
+            </header>            
         </div>
         <div class="container">
-            <div class="row align-items-center">
+            <div class="row align-items-center align-content-lg-center vertical-align">
                 <div class="col">
-                   <table >
+                   <table cellpadding="0" cellspacing="0" style="width: 80%">
                         <tr>
                             <td id="1" class="noSeleccionado"></td>
                             <td id="2" class="noSeleccionado"></td>
@@ -65,63 +73,66 @@
                     </table>
                 </div>
                 <div class="col">
-                    <table>
-                        <tr>
-                            <td id="peso1" class="cuadroPeso">0</td>
-                            <td id="peso2" class="cuadroPeso">0</td>
-                            <td id="peso3" class="cuadroPeso">0</td>
-                            <td id="peso4" class="cuadroPeso">0</td>
-                            <td id="peso5" class="cuadroPeso">0</td>
-                        </tr>
-                        <tr>
-                            <td id="peso6" class="cuadroPeso">0</td>
-                            <td id="peso7" class="cuadroPeso">0</td>
-                            <td id="peso8" class="cuadroPeso">0</td>
-                            <td id="peso9" class="cuadroPeso">0</td>
-                            <td id="peso10" class="cuadroPeso">0</td>
-                        </tr>
-                        <tr>
-                            <td id="peso11" class="cuadroPeso">0</td>
-                            <td id="peso12" class="cuadroPeso">0</td>
-                            <td id="peso13" class="cuadroPeso">0</td>
-                            <td id="peso14" class="cuadroPeso">0</td>
-                            <td id="peso15" class="cuadroPeso">0</td>
-                        </tr>
-                        <tr>
-                            <td id="peso16" class="cuadroPeso">0</td>
-                            <td id="peso17" class="cuadroPeso">0</td>
-                            <td id="peso18" class="cuadroPeso">0</td>
-                            <td id="peso19" class="cuadroPeso">0</td>
-                            <td id="peso20" class="cuadroPeso">0</td>
-                        </tr>
-                        <tr>
-                            <td id="peso21" class="cuadroPeso">0</td>
-                            <td id="peso22" class="cuadroPeso">0</td>
-                            <td id="peso23" class="cuadroPeso">0</td>
-                            <td id="peso24" class="cuadroPeso">0</td>
-                            <td id="peso25" class="cuadroPeso">0</td>
-                        </tr>
-                        <tr>
-                            <td id="peso26" class="cuadroPeso">0</td>
-                            <td id="peso27" class="cuadroPeso">0</td>
-                            <td id="peso28" class="cuadroPeso">0</td>
-                            <td id="peso29" class="cuadroPeso">0</td>
-                            <td id="peso30" class="cuadroPeso">0</td>
-                        </tr>
-                        <tr>
-                            <td id="peso31" class="cuadroPeso">0</td>
-                            <td id="peso32" class="cuadroPeso">0</td>
-                            <td id="peso33" class="cuadroPeso">0</td>
-                            <td id="peso34" class="cuadroPeso">0</td>
-                            <td id="peso35" class="cuadroPeso">0</td>
-                        </tr>
-                    </table>
+                    <div class="row align-items-center align-content-lg-center vertical-align">
+                        <table cellpadding="0" cellspacing="0" style="width: 80%">
+                            <tr>
+                                <td id="peso1" class="cuadroPeso">0</td>
+                                <td id="peso2" class="cuadroPeso">0</td>
+                                <td id="peso3" class="cuadroPeso">0</td>
+                                <td id="peso4" class="cuadroPeso">0</td>
+                                <td id="peso5" class="cuadroPeso">0</td>
+                            </tr>
+                            <tr>
+                                <td id="peso6" class="cuadroPeso">0</td>
+                                <td id="peso7" class="cuadroPeso">0</td>
+                                <td id="peso8" class="cuadroPeso">0</td>
+                                <td id="peso9" class="cuadroPeso">0</td>
+                                <td id="peso10" class="cuadroPeso">0</td>
+                            </tr>
+                            <tr>
+                                <td id="peso11" class="cuadroPeso">0</td>
+                                <td id="peso12" class="cuadroPeso">0</td>
+                                <td id="peso13" class="cuadroPeso">0</td>
+                                <td id="peso14" class="cuadroPeso">0</td>
+                                <td id="peso15" class="cuadroPeso">0</td>
+                            </tr>
+                            <tr>
+                                <td id="peso16" class="cuadroPeso">0</td>
+                                <td id="peso17" class="cuadroPeso">0</td>
+                                <td id="peso18" class="cuadroPeso">0</td>
+                                <td id="peso19" class="cuadroPeso">0</td>
+                                <td id="peso20" class="cuadroPeso">0</td>
+                            </tr>
+                            <tr>
+                                <td id="peso21" class="cuadroPeso">0</td>
+                                <td id="peso22" class="cuadroPeso">0</td>
+                                <td id="peso23" class="cuadroPeso">0</td>
+                                <td id="peso24" class="cuadroPeso">0</td>
+                                <td id="peso25" class="cuadroPeso">0</td>
+                            </tr>
+                            <tr>
+                                <td id="peso26" class="cuadroPeso">0</td>
+                                <td id="peso27" class="cuadroPeso">0</td>
+                                <td id="peso28" class="cuadroPeso">0</td>
+                                <td id="peso29" class="cuadroPeso">0</td>
+                                <td id="peso30" class="cuadroPeso">0</td>
+                            </tr>
+                            <tr>
+                                <td id="peso31" class="cuadroPeso">0</td>
+                                <td id="peso32" class="cuadroPeso">0</td>
+                                <td id="peso33" class="cuadroPeso">0</td>
+                                <td id="peso34" class="cuadroPeso">0</td>
+                                <td id="peso35" class="cuadroPeso">0</td>
+                            </tr>
+                        </table>    
+                    </div>
                 </div>
             </div>
         </div>
-
-        <button onclick="clasificar()">Clasificar</button>
-        <button onclick="limpiar()">Limpiar</button>
+        <div class="container">
+            <button onclick="clasificar()" class="btn-outline-primary" type="button">Clasificar</button>
+            <button onclick="limpiar()" class="btn-outline-primary" type="button">Limpiar</button>    
+        </div>
         <script>
 
             var valE = 0;
@@ -362,11 +373,6 @@
         <!--<script type="text/javascript" src='Perceptron.js'></script>--> 
         <!--<script type="text/javascript" src='RedNeuronal.js'></script>-->
 
-        <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
-        <script type="text/javascript" src='canvas.js'></script>
-        <script type="text/javascript" src='Third-Party/encog-javascript/encog.js'></script>
-        <script type="text/javascript" src='Third-Party/encog-javascript/encog-widget.js'></script>
+      
     </body>
 </html>

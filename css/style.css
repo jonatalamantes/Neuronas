@@ -24,3 +24,7 @@ canvas {
     border: 1px solid black;
     padding: 15px;
 }
+.vertical-align {
+    display: flex;
+    align-items: center;
+}
